@@ -1,4 +1,4 @@
-import { game, Sprite } from "./sgc/wizardsLoader.js";
+import { game, Sprite } from "./sgc/sgc.js";
 
 game.setBackground("floor.png");
 
@@ -16,8 +16,23 @@ class PlayerWizard extends Sprite {
 
         this.x = this.width;
 
-        this.y = this.y;
-      }
+        this.y = this.height;
+
+        this.defineAnimation("down", 6, 8);
+
+        this.speedWhenWalking = 100;
+    }
+    handleDownArrowKey() {
+
+    this.playAnimation("down");
+
+    this.speed = this.speedWhenWalking;
+
+    this.angle = 270;
+
+}
+
 }
 
 let marcus = new PlayerWizard();
+

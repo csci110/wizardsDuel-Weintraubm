@@ -1,6 +1,7 @@
 import { game, Sprite } from "./sgc/sgc.js";
 
 game.setBackground("floor.png");
+
 class PlayerWizard extends Sprite {
     constructor() {
         super();
@@ -19,6 +20,8 @@ class PlayerWizard extends Sprite {
 
         this.defineAnimation("down", 6, 8);
 
+        this.defineAnimation("up",0,2);
+        
         this.defineAnimation("right", 3, 5);
 
         this.speedWhenWalking = 100;
@@ -34,10 +37,17 @@ class PlayerWizard extends Sprite {
         this.angle = 270;
 
     }
+    handleUpArrowKey() {
+        this.playAnimation("up");
+        
+        this.speed = this.speedWhenWalking;
+        
+        this.angle = 90;
+    }
     handleSpacebar() {
         let spell = new Spell();
 
-        spell.x = this.width; // this sets the position of the spell object equal to
+        spell.x = this.x + this.width; // this sets the position of the spell object equal to
 
         spell.y = this.y; // the position of any object created from the PlayerWizard class
 

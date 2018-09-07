@@ -90,6 +90,7 @@ class Spell extends Sprite {
         new Fireball(otherSprite);
         return false;
     }
+    if(this.getImage() !== otherSprite.getImage)
 }
 
 

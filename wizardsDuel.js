@@ -75,6 +75,11 @@ class Spell extends Sprite {
         //delete spell when it leaves display area
         game.removeSprite(this);
     }
+    handleCollision(otherSprite) {
+        game.removeSprite(this);
+        new Fireball(otherSprite);
+        return false;
+    }
 }
 
 
@@ -89,9 +94,9 @@ class NonPlayerWizard extends Sprite {
         this.y = this.height;
         this.angle = 270;
         this.speed = 150;
-        this.defineAnimation("up", 0, 3);
+        this.defineAnimation("up", 0, 2);
         this.defineAnimation("left", 10, 12);
-        this.defineAnimation("down", 7, 9);
+        this.defineAnimation("down", 7, 8);
         this.playAnimation("down");
 
     }
@@ -125,6 +130,29 @@ class NonPlayerWizard extends Sprite {
         }
     }
     handleAnimationEnd() {
+        if(this.angle === 90){
+            this.playAnimation("up");
+        }
+        if(this.angle === 270){
+            this.playAnimation("down");
+        }
+
+    }
 }
 
 let stranger = new NonPlayerWizard();
+
+
+class Fireball extends Sprite {
+    constructor(deadSprite) {
+        super();
+        this.x = deadSprite.x;
+        this.y = deadSprite.y;
+        this.setImage("fireballSheet.png");
+        this.name = "a ball of fire.";
+        game.removeSprite(deadSprite);
+        this.defineAnimation("explode",0,16);
+        this.playAnimation("explode");
+        
+}
+}

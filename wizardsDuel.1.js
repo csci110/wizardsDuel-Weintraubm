@@ -25,8 +25,6 @@ class PlayerWizard extends Sprite {
         this.defineAnimation("right", 3, 5);
 
         this.speedWhenWalking = 100;
-        
-        this.spellCastTime = 0; 
 
 
     }
@@ -132,7 +130,7 @@ class NonPlayerWizard extends Sprite {
 
     }
     handleGameLoop() {
-        this.y = Math.max(0, this.y);
+        this.y = Math.max(5, this.y);
 
         this.y = Math.min(552, this.y);
 
@@ -213,6 +211,10 @@ class Fireball extends Sprite {
                 "\nstranger in the dark cloak!");
 
         }
+
+    }
+    handleAnimationEnd() {
+        game.removeSprite(this);
         if (!game.isActiveSprite(marcus)) {
             game.end("Marcus is defeated by the mysterious\nstranger in the dark cloak!" +
                 "\n\nBetter luck next time.");

@@ -58,26 +58,21 @@ class PlayerWizard extends Sprite {
         spell.angle = 0;
 
         this.playAnimation("right");
-        
-        
-         // if the current time is 2 or more seconds greater than the previous spellCastTime 
 
-if (now - this.spellCastTime >= 2) { 
+        let now = game.getTime(); // get the number of seconds since game start
 
-       // reset the timer                               
+        if (now - this.spellCastTime >= 2) {
+            this.spellCastTime = now;
+        }
 
-       this.spellCastTime = now;
 
-       // and cast a spell 
 
-       // insert the rest of your spell-generating code here
 
- }           
 
     }
 
     handleGameLoop() {
-        this.y = Math.max(0, this.y);
+        this.y = Math.max(5, this.y);
 
         this.y = Math.min(552, this.y);
     }
@@ -101,29 +96,21 @@ class Spell extends Sprite {
         game.removeSprite(this);
     }
     handleCollision(otherSprite) {
-        game.removeSprite(this);
-        new Fireball(otherSprite);
+        // Compare images so Stranger's spells don't destroy each other.
+        if (this.getImage() !== otherSprite.getImage()) {
+            // Adjust mostly blank spell image to vertical center.
+            let verticalOffset = Math.abs(this.y - otherSprite.y);
+            if (verticalOffset < this.height / 2) {
+                game.removeSprite(this);
+                new Fireball(otherSprite);
+            }
+        }
+
+
+
         return false;
     }
-    if (this.getImage() !== otherSprite.getImage()) {
-        game.removeSprite(this);
-        new Fireball(otherSprite);
-    }
-     // Compare images so Stranger's spells don't destroy each other.
-     if (this.getImage() !== otherSprite.getImage()) {
-         // Adjust mostly blank spell image to vertical center.
-         let verticalOffset = Math.abs(this.y - otherSprite.y);
-         if (verticalOffset < this.height / 2) {
-             game.removeSprite(this);
-             new Fireball(otherSprite);
-
-      }
-
-  }
-
-  return false;
 }
-
 
 class NonPlayerWizard extends Sprite {
     constructor() {
@@ -143,11 +130,10 @@ class NonPlayerWizard extends Sprite {
 
     }
     handleGameLoop() {
-        this.y = Math.max(0, this.y);
+        this.y = Math.max(5, this.y);
 
         this.y = Math.min(552, this.y);
-    }
-    handleGameLoop() {
+
         if (this.y <= 0) {
 
             // Upward motion has reached top, so turn down
@@ -157,7 +143,6 @@ class NonPlayerWizard extends Sprite {
             this.angle = 270;
 
             this.playAnimation("down");
-
         }
 
         if (this.y >= game.displayHeight - this.height) {
@@ -170,7 +155,29 @@ class NonPlayerWizard extends Sprite {
 
             this.playAnimation("up");
         }
+        if (Math.random() < 0.01) {
+            let spell = new Spell();
+
+            spell.x = this.x - this.width; // this sets the position of the spell object equal to
+
+            spell.y = this.y; // the position of any object created from the PlayerWizard class
+
+            spell.name = "A spell cast by the Stranger";
+
+            spell.setImage("strangerSpellSheet.png");
+
+            spell.angle = 180;
+
+            this.playAnimation("left");
+        }
+
+
+
     }
+
+
+
+
     handleAnimationEnd() {
         if (this.angle === 90) {
             this.playAnimation("up");
@@ -179,33 +186,6 @@ class NonPlayerWizard extends Sprite {
             this.playAnimation("down");
         }
 
-    }
-    handleGameLoop() {
-        let spell = new Spell();
-
-        spell.x = this.x + this.width; // this sets the position of the spell object equal to
-
-        spell.y = this.y; // the position of any object created from the PlayerWizard class
-
-        spell.name = "A spell cast by the Stranger";
-
-        spell.setImage("strangerSpellSheet.png");
-
-        spell.angle = 180;
-
-        this.playAnimation("left");
-        
-        if (*** write your conditional expression here ***) {
-
-   // Create a spell object 48 pixels to the left of this object            
-
-   // Make it go left, give it a name and an image
-
-   // Play the left animation
-
-}
-
-    }
     }
 }
 
@@ -236,6 +216,8 @@ class Fireball extends Sprite {
     handleAnimationEnd() {
         game.removeSprite(this);
         if (!game.isActiveSprite(marcus)) {
-            game.end("Marcus is defeated by the mysterious\nstranger in the dark cloak!" + 
+            game.end("Marcus is defeated by the mysterious\nstranger in the dark cloak!" +
                 "\n\nBetter luck next time.");
+        }
+    }
 }

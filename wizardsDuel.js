@@ -58,6 +58,21 @@ class PlayerWizard extends Sprite {
         spell.angle = 0;
 
         this.playAnimation("right");
+        
+        
+         // if the current time is 2 or more seconds greater than the previous spellCastTime 
+
+if (now - this.spellCastTime >= 2) { 
+
+       // reset the timer                               
+
+       this.spellCastTime = now;
+
+       // and cast a spell 
+
+       // insert the rest of your spell-generating code here
+
+ }           
 
     }
 
@@ -179,6 +194,16 @@ class NonPlayerWizard extends Sprite {
         spell.angle = 180;
 
         this.playAnimation("left");
+        
+        if (*** write your conditional expression here ***) {
+
+   // Create a spell object 48 pixels to the left of this object            
+
+   // Make it go left, give it a name and an image
+
+   // Play the left animation
+
+}
 
     }
     }

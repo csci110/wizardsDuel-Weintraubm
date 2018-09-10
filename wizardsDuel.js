@@ -48,6 +48,8 @@ class PlayerWizard extends Sprite {
     }
     handleSpacebar() {
         let spell = new Spell();
+        
+        let now = game.getTime(); // get the number of seconds since game start
 
         spell.x = this.x + this.width; // this sets the position of the spell object equal to
 
@@ -60,8 +62,6 @@ class PlayerWizard extends Sprite {
         spell.angle = 0;
 
         this.playAnimation("right");
-
-        let now = game.getTime(); // get the number of seconds since game start
 
         if (now - this.spellCastTime >= 2) {
             this.spellCastTime = now;

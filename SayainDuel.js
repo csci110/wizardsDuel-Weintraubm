@@ -1,14 +1,14 @@
 import { game, Sprite } from "./sgc/sgc.js";
 
-game.setBackground("floor.png");
+game.setBackground("CellArena.png");
 
-class PlayerWizard extends Sprite {
+class PlayerSayian extends Sprite {
     constructor() {
         super();
 
-        this.name = "Marcus the Wizard";
+        this.name = "Son Goku";
 
-        this.setImage("marcusSheet.png");
+        this.setImage("Goku.png");
 
         this.width = 48;
 
@@ -18,44 +18,44 @@ class PlayerWizard extends Sprite {
 
         this.y = this.height;
 
-        this.defineAnimation("down", 6, 8);
+        //this.defineAnimation("down", 6, 8);
 
-        this.defineAnimation("up", 0, 2);
+        //this.defineAnimation("up", 0, 2);
 
-        this.defineAnimation("right", 3, 5);
+        //this.defineAnimation("right", 3, 5);
 
         this.speedWhenWalking = 100;
 
 
     }
-    handleDownArrowKey() {
+    handleRigthArrowKey() {
 
-        this.playAnimation("down");
+        //this.playAnimation("right");
 
         this.speed = this.speedWhenWalking;
 
-        this.angle = 270;
+        this.angle = 360;
 
     }
     handleUpArrowKey() {
-        this.playAnimation("up");
+        //this.playAnimation("left");
 
         this.speed = this.speedWhenWalking;
 
-        this.angle = 90;
+        this.angle = 180;
     }
     handleSpacebar() {
-        let spell = new Spell();
+        let ki = new Ki();
 
-        spell.x = this.x + this.width; // this sets the position of the spell object equal to
+        ki.x = this.x + this.width; // this sets the position of the spell object equal to
 
-        spell.y = this.y; // the position of any object created from the PlayerWizard class
+        ki.y = this.y; // the position of any object created from the PlayerWizard class
 
-        spell.name = "A spell cast by Marcus";
+        ki.name = "Turtle Devestation Wave";
 
-        spell.setImage("marcusSpellSheet.png");
+        ki.setImage("Kamehameha.png");
 
-        spell.angle = 0;
+        ki.angle = 0;
 
         this.playAnimation("right");
 
@@ -80,16 +80,16 @@ class PlayerWizard extends Sprite {
 }
 
 
-let marcus = new PlayerWizard();
+let goku = new PlayerSayian();
 
-class Spell extends Sprite {
+class Ki extends Sprite {
     constructor() {
         super();
         this.speed = 200;
         this.height = 48;
         this.width = 48;
-        this.defineAnimation("magic", 0, 7);
-        this.playAnimation("magic", true);
+        //this.defineAnimation("magic", 0, 7);
+        //this.playAnimation("magic", true);
     }
     handleBoundaryContact() {
         //delete spell when it leaves display area
@@ -112,27 +112,27 @@ class Spell extends Sprite {
     }
 }
 
-class NonPlayerWizard extends Sprite {
+class NonPlayerSayain extends Sprite {
     constructor() {
         super();
-        this.name = "The mysterious stranger";
-        this.setImage("strangerSheet.png");
+        this.name = "Vegeta Prince of All Sayains";
+        this.setImage("VegetaSpriteSheet.png");
         this.width = 48;
         this.height = 48;
         this.x = game.displayWidth - 2 * this.width;
         this.y = this.height;
-        this.angle = 270;
+        this.angle = 180;
         this.speed = 150;
-        this.defineAnimation("up", 0, 2);
-        this.defineAnimation("left", 10, 12);
-        this.defineAnimation("down", 7, 8);
-        this.playAnimation("down");
+        //this.defineAnimation("up", 0, 2);
+        //this.defineAnimation("left", 10, 12);
+        //this.defineAnimation("down", 7, 8);
+        //this.playAnimation("down");
 
     }
     handleGameLoop() {
-        this.y = Math.max(5, this.y);
+        this.y = Math.max(this.y, 0);
 
-        this.y = Math.min(552, this.y);
+        this.y = Math.min(this.x, 800);
 
         if (this.y <= 0) {
 
@@ -140,35 +140,35 @@ class NonPlayerWizard extends Sprite {
 
             this.y = 0;
 
-            this.angle = 270;
+            this.angle = 180;
 
-            this.playAnimation("down");
+            //this.playAnimation("left");
         }
 
-        if (this.y >= game.displayHeight - this.height) {
+        if (this.y >= game.displayWidth - this.width) {
 
             // Downward motion has reached bottom, so turn up
 
-            this.y = game.displayHeight - this.height;
+            this.y = game.displayWidth - this.width;
 
-            this.angle = 90;
+            this.angle = 360;
 
-            this.playAnimation("up");
+            // this.playAnimation("right");
         }
         if (Math.random() < 0.01) {
-            let spell = new Spell();
+            let Pride = new Ki();
 
-            spell.x = this.x - this.width; // this sets the position of the spell object equal to
+            Pride.x = this.x - this.width; // this sets the position of the spell object equal to
 
-            spell.y = this.y; // the position of any object created from the PlayerWizard class
+            Pride.y = this.y; // the position of any object created from the PlayerWizard class
 
-            spell.name = "A spell cast by the Stranger";
+            Pride.name = "FINAL FLASH!";
 
-            spell.setImage("strangerSpellSheet.png");
+            Pride.setImage("FlashSheet.png");
 
-            spell.angle = 180;
+            Pride.angle = 90;
 
-            this.playAnimation("left");
+            //this.playAnimation("left");
         }
 
 
@@ -178,18 +178,11 @@ class NonPlayerWizard extends Sprite {
 
 
 
-    handleAnimationEnd() {
-        if (this.angle === 90) {
-            this.playAnimation("up");
-        }
-        if (this.angle === 270) {
-            this.playAnimation("down");
-        }
 
-    }
+
 }
 
-let stranger = new NonPlayerWizard();
+let Vegeta = new NonPlayerSayain();
 
 
 class Fireball extends Sprite {
@@ -200,24 +193,22 @@ class Fireball extends Sprite {
         this.setImage("fireballSheet.png");
         this.name = "a ball of fire.";
         game.removeSprite(deadSprite);
-        this.defineAnimation("explode", 0, 16);
-        this.playAnimation("explode");
+        //this.defineAnimation("explode", 0, 16);
+        //this.playAnimation("explode");
 
     }
     handleAnimationEnd() {
         game.removeSprite(this);
         if (!game.isActiveSprite(stranger)) {
-            game.end("Congratulations!\n\nMarcus has defeated the mysterious" +
-                "\nstranger in the dark cloak!");
+            game.end("Im a Supah sayai...");
 
         }
 
     }
     handleAnimationEnd() {
         game.removeSprite(this);
-        if (!game.isActiveSprite(marcus)) {
-            game.end("Marcus is defeated by the mysterious\nstranger in the dark cloak!" +
-                "\n\nBetter luck next time.");
+        if (!game.isActiveSprite(goku)) {
+            game.end("Goku got Yamcha'd");
         }
     }
 }

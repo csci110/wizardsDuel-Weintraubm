@@ -1,6 +1,6 @@
 import { game, Sprite } from "./sgc/sgc.js";
 
-game.setBackground("CellArena.png");
+game.setBackground("CellArena.jpg");
 
 class PlayerSayian extends Sprite {
     constructor() {
@@ -28,7 +28,7 @@ class PlayerSayian extends Sprite {
 
 
     }
-    handleRigthArrowKey() {
+    handleRightArrowKey() {
 
         //this.playAnimation("right");
 
@@ -37,7 +37,7 @@ class PlayerSayian extends Sprite {
         this.angle = 360;
 
     }
-    handleUpArrowKey() {
+    handleLeftArrowKey() {
         //this.playAnimation("left");
 
         this.speed = this.speedWhenWalking;
@@ -47,17 +47,17 @@ class PlayerSayian extends Sprite {
     handleSpacebar() {
         let ki = new Ki();
 
-        ki.x = this.x + this.width; // this sets the position of the spell object equal to
+        ki.x = this.x; // this sets the position of the spell object equal to
 
-        ki.y = this.y; // the position of any object created from the PlayerWizard class
+        ki.y = this.y + this.height; // the position of any object created from the PlayerWizard class
 
         ki.name = "Turtle Devestation Wave";
 
         ki.setImage("Kamehameha.png");
 
-        ki.angle = 0;
+        ki.angle = 270;
 
-        this.playAnimation("right");
+        //this.playAnimation("right");
 
         let now = game.getTime(); // get the number of seconds since game start
 
@@ -72,9 +72,9 @@ class PlayerSayian extends Sprite {
     }
 
     handleGameLoop() {
-        this.y = Math.max(5, this.y);
+        this.x = Math.max(5, this.x);
 
-        this.y = Math.min(552, this.y);
+        this.x = Math.min(750, this.x);
     }
 
 }
@@ -119,8 +119,10 @@ class NonPlayerSayain extends Sprite {
         this.setImage("VegetaSpriteSheet.png");
         this.width = 48;
         this.height = 48;
-        this.x = game.displayWidth - 2 * this.width;
-        this.y = this.height;
+        this.x = 400;
+        //game.displayWidth - 2 * this.width;
+        this.y = 500;
+        //this.height;
         this.angle = 180;
         this.speed = 150;
         //this.defineAnimation("up", 0, 2);
@@ -130,35 +132,35 @@ class NonPlayerSayain extends Sprite {
 
     }
     handleGameLoop() {
-        this.y = Math.max(this.y, 0);
+        this.x = Math.max(this.x, 5);
 
-        this.y = Math.min(this.x, 800);
+        this.x = Math.min(this.x, 750);
 
-        if (this.y <= 0) {
+        if (this. x == 0) {
 
             // Upward motion has reached top, so turn down
 
-            this.y = 0;
+            this.x = 0;
 
-            this.angle = 180;
+            this.angle = 360;
 
             //this.playAnimation("left");
         }
 
-        if (this.y >= game.displayWidth - this.width) {
+        if (this.x >= game.displayWidth - this.width) {
 
             // Downward motion has reached bottom, so turn up
 
-            this.y = game.displayWidth - this.width;
+            this.x = game.displayWidth - this.width;
 
-            this.angle = 360;
+            this.angle = 180;
 
             // this.playAnimation("right");
         }
         if (Math.random() < 0.01) {
             let Pride = new Ki();
 
-            Pride.x = this.x - this.width; // this sets the position of the spell object equal to
+            Pride.x = this.x + this.height; // this sets the position of the spell object equal to
 
             Pride.y = this.y; // the position of any object created from the PlayerWizard class
 
@@ -199,7 +201,7 @@ class Fireball extends Sprite {
     }
     handleAnimationEnd() {
         game.removeSprite(this);
-        if (!game.isActiveSprite(stranger)) {
+        if (!game.isActiveSprite(Vegeta)) {
             game.end("Im a Supah sayai...");
 
         }
@@ -212,3 +214,21 @@ class Fireball extends Sprite {
         }
     }
 }
+
+
+//Kamehameha Beam Sprite PNG (200x100)
+//https://www.roblox.com/library/226767170/Kamehameha-Beam-Sprite-PNG-200x100
+//
+
+//Legend Ivanhoe's Dragon Ball Z HD / HR Stages 
+//http://mugenguild.com/forum/topics/legend-ivanhoes-dragon-ball-z-hd-hr-stages-161596.0.html
+
+
+
+//Vegeta / Super Saiyan Vegeta (+84) by Belialhttp://www.sprites-unlimited.com/game/?code=DBZSB
+
+//Ho Long
+//https://www.pinterest.com/pin/460633868108890643/
+
+
+

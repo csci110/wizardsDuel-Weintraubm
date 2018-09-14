@@ -25,8 +25,10 @@ class PlayerWizard extends Sprite {
         this.defineAnimation("right", 3, 5);
 
         this.speedWhenWalking = 100;
-        
-        this.spellCastTime = 0; 
+
+        let now = game.getTime();
+
+        this.spellCastTime = now;
 
 
     }
@@ -47,9 +49,13 @@ class PlayerWizard extends Sprite {
         this.angle = 90;
     }
     handleSpacebar() {
-        let spell = new Spell();
-        
         let now = game.getTime(); // get the number of seconds since game start
+
+        if (now - this.spellCastTime >= 2) {
+            this.spellCastTime = now;
+        }
+        
+        let spell = new Spell();
 
         spell.x = this.x + this.width; // this sets the position of the spell object equal to
 
@@ -63,15 +69,15 @@ class PlayerWizard extends Sprite {
 
         this.playAnimation("right");
 
-        if (now - this.spellCastTime >= 2) {
-            this.spellCastTime = now;
-        }
-
-
-
 
 
     }
+
+
+
+
+
+
 
     handleGameLoop() {
         this.y = Math.max(5, this.y);

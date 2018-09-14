@@ -45,6 +45,8 @@ class PlayerSayian extends Sprite {
         this.angle = 180;
     }
     handleSpacebar() {
+        if (now - this.spellCastTime >= 2) {
+            this.spellCastTime = now;
         let ki = new Ki();
 
         ki.x = this.x; // this sets the position of the spell object equal to
@@ -61,15 +63,15 @@ class PlayerSayian extends Sprite {
 
         let now = game.getTime(); // get the number of seconds since game start
 
-        if (now - this.spellCastTime >= 2) {
-            this.spellCastTime = now;
+       
         }
-
-
-
-
-
     }
+
+
+
+
+
+    
 
     handleGameLoop() {
         this.x = Math.max(5, this.x);
@@ -134,13 +136,13 @@ class NonPlayerSayain extends Sprite {
     handleGameLoop() {
         this.x = Math.max(this.x, 5);
 
-        this.x = Math.min(this.x, 750);
+        //this.x = Math.min(this.x, 750);
 
-        if (this. x == 0) {
+        if (this. x == 5) {
 
             // Upward motion has reached top, so turn down
 
-            this.x = 0;
+            this.x = 5;
 
             this.angle = 360;
 
@@ -151,7 +153,7 @@ class NonPlayerSayain extends Sprite {
 
             // Downward motion has reached bottom, so turn up
 
-            this.x = game.displayWidth - this.width;
+            this.x = game.displayWidth - this.width - 10;
 
             this.angle = 180;
 
@@ -160,9 +162,9 @@ class NonPlayerSayain extends Sprite {
         if (Math.random() < 0.01) {
             let Pride = new Ki();
 
-            Pride.x = this.x + this.height; // this sets the position of the spell object equal to
+            Pride.x = this.x ; // this sets the position of the spell object equal to
 
-            Pride.y = this.y; // the position of any object created from the PlayerWizard class
+            Pride.y = this.y - this.height; // the position of any object created from the PlayerWizard class
 
             Pride.name = "FINAL FLASH!";
 
@@ -195,8 +197,8 @@ class Fireball extends Sprite {
         this.setImage("fireballSheet.png");
         this.name = "a ball of fire.";
         game.removeSprite(deadSprite);
-        //this.defineAnimation("explode", 0, 16);
-        //this.playAnimation("explode");
+        this.defineAnimation("explode", 0, 16);
+        this.playAnimation("explode");
 
     }
     handleAnimationEnd() {

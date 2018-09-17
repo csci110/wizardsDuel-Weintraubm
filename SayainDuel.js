@@ -45,8 +45,7 @@ class PlayerSayian extends Sprite {
         this.angle = 180;
     }
     handleSpacebar() {
-        if (now - this.spellCastTime >= 2) {
-            this.spellCastTime = now;
+
         let ki = new Ki();
 
         ki.x = this.x; // this sets the position of the spell object equal to
@@ -63,15 +62,15 @@ class PlayerSayian extends Sprite {
 
         let now = game.getTime(); // get the number of seconds since game start
 
-       
-        }
+
     }
 
 
 
 
 
-    
+
+
 
     handleGameLoop() {
         this.x = Math.max(5, this.x);
@@ -138,7 +137,7 @@ class NonPlayerSayain extends Sprite {
 
         //this.x = Math.min(this.x, 750);
 
-        if (this. x == 5) {
+        if (this.x == 5) {
 
             // Upward motion has reached top, so turn down
 
@@ -162,7 +161,7 @@ class NonPlayerSayain extends Sprite {
         if (Math.random() < 0.01) {
             let Pride = new Ki();
 
-            Pride.x = this.x ; // this sets the position of the spell object equal to
+            Pride.x = this.x; // this sets the position of the spell object equal to
 
             Pride.y = this.y - this.height; // the position of any object created from the PlayerWizard class
 
@@ -231,6 +230,3 @@ class Fireball extends Sprite {
 
 //Ho Long
 //https://www.pinterest.com/pin/460633868108890643/
-
-
-

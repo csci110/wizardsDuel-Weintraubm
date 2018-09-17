@@ -49,25 +49,24 @@ class PlayerWizard extends Sprite {
         this.angle = 90;
     }
     handleSpacebar() {
-        let now = game.getTime(); // get the number of seconds since game start
-
+        let now = game.getTime(); // get the number of seconds since game star
         if (now - this.spellCastTime >= 2) {
             this.spellCastTime = now;
+
+            let spell = new Spell();
+
+            spell.x = this.x + this.width; // this sets the position of the spell object equal to
+
+            spell.y = this.y; // the position of any object created from the PlayerWizard class
+
+            spell.name = "A spell cast by Marcus";
+
+            spell.setImage("marcusSpellSheet.png");
+
+            spell.angle = 0;
+
+            this.playAnimation("right");
         }
-        
-        let spell = new Spell();
-
-        spell.x = this.x + this.width; // this sets the position of the spell object equal to
-
-        spell.y = this.y; // the position of any object created from the PlayerWizard class
-
-        spell.name = "A spell cast by Marcus";
-
-        spell.setImage("marcusSpellSheet.png");
-
-        spell.angle = 0;
-
-        this.playAnimation("right");
 
 
 

@@ -45,24 +45,23 @@ class PlayerSayian extends Sprite {
         this.angle = 180;
     }
     handleSpacebar() {
+      
 
-        let ki = new Ki();
+            let ki = new Ki();
 
-        ki.x = this.x; // this sets the position of the spell object equal to
+            ki.x = this.x; // this sets the position of the spell object equal to
 
-        ki.y = this.y + this.height; // the position of any object created from the PlayerWizard class
+            ki.y = this.y + this.height; // the position of any object created from the PlayerWizard class
 
-        ki.name = "Turtle Devestation Wave";
+            ki.name = "Turtle Devestation Wave";
 
-        ki.setImage("Kamehameha.png");
+            ki.setImage("Kamehameha.png");
 
-        ki.angle = 270;
+            ki.angle = 270;
 
-        //this.playAnimation("right");
+            //this.playAnimation("right");
 
-        let now = game.getTime(); // get the number of seconds since game start
-
-
+        
     }
 
 
